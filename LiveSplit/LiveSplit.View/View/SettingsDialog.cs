@@ -43,6 +43,7 @@ namespace LiveSplit.View
             txtSwitchNext.DataBindings.Add("Text", this, "SwitchComparisonNext");
             chkGlobalHotkeys.DataBindings.Add("Checked", Settings, "GlobalHotkeysEnabled");
             chkWarnOnReset.DataBindings.Add("Checked", Settings, "WarnOnReset");
+            chkAlwaysWarnOnReset.DataBindings.Add("Checked", Settings, "AlwaysWarnOnReset");
             chkDoubleTap.DataBindings.Add("Checked", Settings, "DoubleTapPrevention");
             txtDelay.DataBindings.Add("Text", this, "HotkeyDelay");
             cbxRaceViewer.DataBindings.Add("SelectedItem", this, "RaceViewer");
@@ -253,5 +254,12 @@ namespace LiveSplit.View
                 Settings.ComparisonGeneratorStates = generatorStates;
         }
 
+        private void chkAlwaysWarnOnReset_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+                chkWarnOnReset.Enabled = false;
+            else
+                chkWarnOnReset.Enabled = true;
+        }
     }
 }

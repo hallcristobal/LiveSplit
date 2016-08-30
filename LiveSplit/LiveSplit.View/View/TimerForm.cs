@@ -2346,6 +2346,7 @@ namespace LiveSplit.View
 
         private DialogResult WarnAboutResetting()
         {
+            
             var warnUser = false;
             for (var index = 0; index < CurrentState.Run.Count; index++)
             {
@@ -2364,6 +2365,14 @@ namespace LiveSplit.View
                 DontRedraw = false;
                 return result;
             }
+            if (Settings.AlwaysWarnOnReset)
+            {
+                DontRedraw = true;
+                var result = MessageBox.Show(this, "Are you sure that you would like to reset?", "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DontRedraw = false;
+                if (result == DialogResult.No) result = DialogResult.Cancel;
+                return result;
+            }
             return DialogResult.Yes;
         }
 
@@ -2378,7 +2387,7 @@ namespace LiveSplit.View
             if (!ResetMessageShown)
             {
                 var result = DialogResult.Yes;
-                if (Settings.WarnOnReset && (!InTimerOnlyMode))
+                if ((Settings.WarnOnReset || Settings.AlwaysWarnOnReset) && (!InTimerOnlyMode))
                 {
                     ResetMessageShown = true;
                     result = WarnAboutResetting();

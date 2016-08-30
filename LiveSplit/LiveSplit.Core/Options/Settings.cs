@@ -27,6 +27,7 @@ namespace LiveSplit.Options
         public bool GlobalHotkeysEnabled { get; set; }
         public bool DeactivateHotkeysForOtherPrograms { get; set; }
         public bool WarnOnReset { get; set; }
+        public bool AlwaysWarnOnReset { get; set; }
         public bool DoubleTapPrevention { get; set; }
         public bool AgreedToSRLRules { get; set; }
         public bool SimpleSumOfBest { get; set; }

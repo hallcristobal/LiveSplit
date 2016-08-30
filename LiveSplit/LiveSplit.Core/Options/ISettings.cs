@@ -51,6 +51,7 @@ namespace LiveSplit.Options
         bool GlobalHotkeysEnabled { get; set; }
         bool DeactivateHotkeysForOtherPrograms { get; set; }
         bool WarnOnReset { get; set; }
+        bool AlwaysWarnOnReset { get; set; }
         bool DoubleTapPrevention { get; set; }
         bool SimpleSumOfBest { get; set; }
         IRaceViewer RaceViewer { get; set; }
