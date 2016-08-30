@@ -205,7 +205,7 @@ namespace LiveSplit.ComponentUtil
                 || read != (SizeT)bytes.Length)
                 return false;
 
-            val = is64Bit ? (IntPtr)BitConverter.ToInt64(bytes, 0) : (IntPtr)BitConverter.ToInt32(bytes, 0);
+            val = is64Bit ? (IntPtr)BitConverter.ToInt64(bytes, 0) : (IntPtr)BitConverter.ToUInt32(bytes, 0);
 
             return true;
         }
@@ -484,6 +484,18 @@ namespace LiveSplit.ComponentUtil
         {
             MemPageProtect oldProtect;
             return WinAPI.VirtualProtectEx(process.Handle, addr, (SizeT)size, protect, out oldProtect);
+        }
+
+        public static IntPtr CreateThread(this Process process, IntPtr startAddress, IntPtr parameter)
+        {
+            IntPtr threadId;
+            return WinAPI.CreateRemoteThread(process.Handle, IntPtr.Zero, (SizeT)0, startAddress, parameter, 0,
+                out threadId);
+        }
+
+        public static IntPtr CreateThread(this Process process, IntPtr startAddress)
+        {
+            return CreateThread(process, startAddress, IntPtr.Zero);
         }
 
         public static void Suspend(this Process process)
